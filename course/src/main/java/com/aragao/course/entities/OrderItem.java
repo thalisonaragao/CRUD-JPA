@@ -30,10 +30,11 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
-    @JsonIgnore
+    @JsonIgnore //Essa anotation está aqui para evitar loops infinitos, porque nesse caso quem tá causando é o get
     public Order getOrder(){
         return id.getOrder();
     }
+
     public void setOrder(Order order){
         id.setOrder(order);
     }
@@ -41,6 +42,7 @@ public class OrderItem implements Serializable {
     public Product getProduct(){
         return id.getProduct();
     }
+
     public void setProduct(Product product){
         id.setProduct(product);
     }
