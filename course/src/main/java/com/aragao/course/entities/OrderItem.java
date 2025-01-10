@@ -20,6 +20,7 @@ public class OrderItem implements Serializable {
     private Integer quantity;
     private Double price;
 
+
     public OrderItem() {
     }
 
@@ -28,15 +29,6 @@ public class OrderItem implements Serializable {
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
-    }
-
-    @JsonIgnore //Essa anotation está aqui para evitar loops infinitos, porque nesse caso quem tá causando é o get
-    public Order getOrder(){
-        return id.getOrder();
-    }
-
-    public void setOrder(Order order){
-        id.setOrder(order);
     }
 
     public Product getProduct(){
@@ -61,6 +53,19 @@ public class OrderItem implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getSubTotal(){ // Para aparecer no json tem que coloca o get
+        return price * quantity;
+    }
+
+    @JsonIgnore //Essa anotation está aqui para evitar loops infinitos, porque nesse caso quem tá causando é o get
+    public Order getOrder(){
+        return id.getOrder();
+    }
+
+    public void setOrder(Order order){
+        id.setOrder(order);
     }
 
     @Override
